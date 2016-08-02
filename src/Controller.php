@@ -24,6 +24,12 @@ abstract class Controller
     protected $view;
 
     /**
+     * Returned value of ajax call (if performed)
+     * @var mixed
+     */
+    protected $ajaxReturned = null;
+
+    /**
      * Controller constructor.
      * @param array $args
      */
@@ -32,7 +38,7 @@ abstract class Controller
 
 
         if(isset($_POST[self::$ajaxActionKey])) {
-            $this->ajaxDispatcher();
+            $this->performAjaxRouting();
         }
 
         $this->execute();
@@ -66,15 +72,22 @@ abstract class Controller
     }
 
     /**
-     * Dispatch ajax action
+     * Default, empty dispatcher
+     * @return bool
      */
     protected function ajaxDispatcher(){
-//        switch($_POST[self::$ajaxActionKey]){
-//            default:
-//                break;
-//        }
+        return false;
+    }
 
-        // Nothing's here
+    /**
+     * Dispatch ajax action
+     */
+    protected function performAjaxRouting(){
+        $mappings = $this->ajaxDispatcher();
+
+        if(is_array($mappings) && isset($mappings[$_POST[self::$ajaxActionKey]])){
+            $this->ajaxReturned = call_user_func($mappings[$_POST[self::$ajaxActionKey]]);
+        }
     }
 
     /**
