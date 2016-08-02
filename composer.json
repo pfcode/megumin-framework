@@ -13,7 +13,8 @@
     }
   ],
   "require": {
-    "php": ">=5.5.0"
+    "php": ">=5.5.0",
+    "smarty/smarty": "v3.1.29"
   },
   "autoload": {
     "psr-4": {

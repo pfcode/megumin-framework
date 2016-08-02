@@ -23,6 +23,13 @@ abstract class MySQLModelFactory extends ModelFactory
     public $timeUpdate = 0;
 
     /**
+     * @param mysqli $mysqli
+     */
+    public static function setDatabase(mysqli $mysqli){
+        self::$database = $mysqli;
+    }
+
+    /**
      * Execute SELECT query and return array of object
      * @param $query
      * @param $forceAssoc
