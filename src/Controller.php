@@ -9,6 +9,8 @@ namespace pfcode\MeguminFramework;
  */
 abstract class Controller
 {
+    protected static $ajaxActionKey = "action";
+
     /**
      * Controller arguments
      * @var array
@@ -27,6 +29,11 @@ abstract class Controller
      */
     public final function __construct(array $args){
         $this->args = $args;
+
+
+        if(isset($_POST[self::$ajaxActionKey])) {
+            $this->ajaxDispatcher();
+        }
 
         $this->execute();
     }
@@ -56,6 +63,18 @@ abstract class Controller
             "params" => $params,
             "time" => time()
         ));
+    }
+
+    /**
+     * Dispatch ajax action
+     */
+    protected function ajaxDispatcher(){
+//        switch($_POST[self::$ajaxActionKey]){
+//            default:
+//                break;
+//        }
+
+        // Nothing's here
     }
 
     /**
