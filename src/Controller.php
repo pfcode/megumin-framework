@@ -9,7 +9,7 @@ namespace pfcode\MeguminFramework;
  */
 abstract class Controller
 {
-    protected static $ajaxActionKey = "action";
+    protected static $postActionKey = "action";
 
     /**
      * Controller arguments
@@ -27,7 +27,7 @@ abstract class Controller
      * Returned value of ajax call (if performed)
      * @var mixed
      */
-    protected $ajaxReturned = null;
+    protected $postReturned = null;
 
     /**
      * Controller constructor.
@@ -37,8 +37,8 @@ abstract class Controller
         $this->args = $args;
 
 
-        if(isset($_POST[self::$ajaxActionKey])) {
-            $this->performAjaxRouting();
+        if(isset($_POST[self::$postActionKey])) {
+            $this->performPostRouting();
         }
 
         $this->execute();
@@ -72,21 +72,21 @@ abstract class Controller
     }
 
     /**
-     * Default, empty dispatcher
+     * Default, empty POST dispatcher
      * @return bool
      */
-    protected function ajaxDispatcher(){
+    protected function postDispatcher(){
         return false;
     }
 
     /**
-     * Dispatch ajax action
+     * Dispatch POST action
      */
-    protected function performAjaxRouting(){
-        $mappings = $this->ajaxDispatcher();
+    protected function performPostRouting(){
+        $mappings = $this->postDispatcher();
 
-        if(is_array($mappings) && isset($mappings[$_POST[self::$ajaxActionKey]])){
-            $this->ajaxReturned = call_user_func($mappings[$_POST[self::$ajaxActionKey]]);
+        if(is_array($mappings) && isset($mappings[$_POST[self::$postActionKey]])){
+            $this->postReturned = call_user_func($mappings[$_POST[self::$postActionKey]]);
         }
     }
 
