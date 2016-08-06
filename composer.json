@@ -15,7 +15,7 @@
   "require": {
     "php": ">=5.5.0"
   },
-  "suggested": {
+  "suggest": {
     "smarty/smarty": ">=v3.1.29"
   },
   "autoload": {
