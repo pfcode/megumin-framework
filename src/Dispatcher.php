@@ -240,6 +240,10 @@ class Dispatcher
             $ret .= implode(self::FRIENDLY_BLOCK_SEPARATOR, $blocks) . self::FRIENDLY_BLOCK_SEPARATOR;
         }
 
+        if(is_string($blocks)){
+            $ret .= $blocks;
+        }
+
         if(is_array($get_data) && count($get_data)){
             $ret .= self::FRIENDLY_QUERY_SEPARATOR . http_build_query($get_data);
         }
