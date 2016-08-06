@@ -9,7 +9,7 @@
 namespace pfcode\MeguminFramework;
 
 
-abstract class AjaxResponse
+abstract class PostResponse
 {
     public abstract function execute();
 }
