@@ -227,7 +227,7 @@ class Dispatcher
 
     /**
      * Generate friendly URL
-     * @param bool|array $blocks    array of strings (consts or variables passed to Dispatcher) to be slash-separated
+     * @param bool|array|string $blocks    array of strings (consts or variables passed to Dispatcher) to be slash-separated
      * @param bool|array $get_data  associative array of data parsed as GET parameters
      * @param bool $isAbsolute      if true, absolute domain will be prepended to URL
      * @return string
