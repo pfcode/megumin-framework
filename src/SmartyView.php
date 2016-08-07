@@ -8,6 +8,7 @@ class SmartyView extends View
 {
     private static $templateDir;
     private static $primaryTemplate;
+    private static $plugins = array();
 
     /**
      * @var Smarty
@@ -39,7 +40,8 @@ class SmartyView extends View
 
         $this->smarty->setTemplateDir(self::$templateDir);
 
-        $this->registerPlugins();
+        $this->registerPlugin("function", "date", array($this, "plugin_date"));
+        $this->registerAllPlugins();
 
         foreach($this->varScope as $key => $value){
             $this->smarty->assign($key, $value);
@@ -75,10 +77,6 @@ class SmartyView extends View
         self::$primaryTemplate = $primaryTemplate;
     }
 
-    public function registerPlugins(){
-        $this->smarty->registerPlugin("function", "date", array($this, "plugin_date"));
-    }
-
     /**
      * @param $params
      * @param $smarty
@@ -90,5 +88,28 @@ class SmartyView extends View
             $format = "d-m-Y";
         }
         echo date($format, $params['t']);
+    }
+
+    /**
+     * Add new plugin to the queue (will be registered after Smarty object instantiation)
+     * @param $type
+     * @param $name
+     * @param $callback
+     */
+    public static function registerPlugin($type, $name, $callback){
+        array_push(self::$plugins, array(
+            "type" => $type,
+            "name" => $name,
+            "callback" => $callback
+        ));
+    }
+
+    /**
+     * Register all queued plugins in current Smarty instance
+     */
+    public function registerAllPlugins(){
+        foreach(self::$plugins as $plugin){
+            $this->smarty->registerPlugin($plugin['type'], $plugin['name'], $plugin['callback']);
+        }
     }
 }
