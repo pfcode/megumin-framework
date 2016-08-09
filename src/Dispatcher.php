@@ -240,8 +240,10 @@ class Dispatcher
             $ret .= implode(self::FRIENDLY_BLOCK_SEPARATOR, $blocks) . self::FRIENDLY_BLOCK_SEPARATOR;
         }
 
-        if(is_string($blocks) && $blocks != "/"){
-            $ret .= $blocks;
+        if(is_string($blocks)){
+            $str = ltrim($blocks, self::FRIENDLY_BLOCK_SEPARATOR);
+            $str = rtrim($str, self::FRIENDLY_BLOCK_SEPARATOR);
+            $ret .= $str;
         }
 
         if(is_array($get_data) && count($get_data)){
