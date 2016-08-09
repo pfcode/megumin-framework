@@ -140,7 +140,7 @@ class Dispatcher
      * @param bool $ignoreControllerNamespace
      * @return bool
      */
-    private static function executeController($controller_class, $args = array(), $ignoreControllerNamespace = false){
+    public static function executeController($controller_class, $args = array(), $ignoreControllerNamespace = false){
         if(!$ignoreControllerNamespace && self::$controllersNamespace){
             if(self::executeController(self::$controllersNamespace . "\\" . $controller_class, $args, true)){
                 return true;
