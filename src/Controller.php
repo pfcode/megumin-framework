@@ -62,7 +62,7 @@ abstract class Controller
      * @param $message
      * @param $params
      */
-    protected function errorJSON($message, $params){
+    protected function errorJSON($message, $params = null){
         $this->outputJSON(array(
             "status" => "error",
             "message" => $message,
