@@ -240,7 +240,7 @@ class Dispatcher
             $ret .= implode(self::FRIENDLY_BLOCK_SEPARATOR, $blocks) . self::FRIENDLY_BLOCK_SEPARATOR;
         }
 
-        if(is_string($blocks)){
+        if(is_string($blocks) && $blocks != "/"){
             $ret .= $blocks;
         }
 
