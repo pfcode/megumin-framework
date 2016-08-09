@@ -27,7 +27,7 @@ class Dispatcher
      * There's why: http://myanimelist.net/character/117225/Megumin
      */
     public static function explosion(){
-        self::performFriendlyRouting();
+        self::performRouting();
 
         // Out of energy, try to run on the next session
         die();
