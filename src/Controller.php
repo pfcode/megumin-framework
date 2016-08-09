@@ -36,12 +36,15 @@ abstract class Controller
     public final function __construct(array $args){
         $this->args = $args;
 
+        if($this->hasPermission()){
+            if(isset($_POST[self::$postActionKey])) {
+                $this->performPostRouting();
+            }
 
-        if(isset($_POST[self::$postActionKey])) {
-            $this->performPostRouting();
+            $this->execute();
+        } else{
+            $this->errorJSON("You have no permission to access this controller");
         }
-
-        $this->execute();
     }
 
     /**
@@ -69,6 +72,14 @@ abstract class Controller
             "params" => $params,
             "time" => time()
         ));
+    }
+
+    /**
+     * Override to implement permission check to controller execution and POST actions
+     * @return bool
+     */
+    protected function hasPermission(){
+        return true;
     }
 
     /**
