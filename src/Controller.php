@@ -11,6 +11,8 @@ abstract class Controller
 {
     protected static $postActionKey = "action";
 
+    protected static $globalPostMappings = false;
+
     /**
      * Controller arguments
      * @var array
@@ -38,7 +40,9 @@ abstract class Controller
 
         if($this->hasPermission()){
             if(isset($_POST[self::$postActionKey])) {
-                $this->performPostRouting();
+                if(!$this->performPostRouting($this->postDispatcher())){
+                    $this->performPostRouting(self::$globalPostMappings);
+                }
             }
 
             $this->execute();
@@ -84,7 +88,7 @@ abstract class Controller
 
     /**
      * Default, empty POST dispatcher
-     * @return bool
+     * @return bool|array
      */
     protected function postDispatcher(){
         return false;
@@ -92,13 +96,25 @@ abstract class Controller
 
     /**
      * Dispatch POST action
+     * @param mixed $mappings
+     * @return bool
      */
-    protected function performPostRouting(){
-        $mappings = $this->postDispatcher();
-
+    protected function performPostRouting($mappings){
         if(is_array($mappings) && isset($mappings[$_POST[self::$postActionKey]])){
             $this->postReturned = call_user_func($mappings[$_POST[self::$postActionKey]]);
+
+            return true;
+        } else{
+            return false;
         }
+    }
+
+    /**
+     * Set mappings for global POST actions
+     * @param $mappings
+     */
+    public static function setGlobalPostMappings($mappings){
+        self::$globalPostMappings = $mappings;
     }
 
     /**
