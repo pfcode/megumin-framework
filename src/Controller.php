@@ -102,7 +102,7 @@ abstract class Controller
      */
     protected function performPostRouting($mappings){
         if(is_array($mappings) && isset($mappings[$_POST[self::$postActionKey]])){
-            self::$matchedPostAction = $_POST[self::$matchedPostAction];
+            self::$matchedPostAction = $_POST[self::$postActionKey];
             $this->postReturned = call_user_func($mappings[$_POST[self::$postActionKey]]);
 
             return true;
