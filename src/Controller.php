@@ -9,6 +9,8 @@ namespace pfcode\MeguminFramework;
  */
 abstract class Controller
 {
+    const HOOK_BEFORE_POSTACTION_NAME = "MEGUMIN_BEFORE_POSTACTION";
+
     private static $matchedPostAction;
     
     protected static $postActionKey = "action";
@@ -103,6 +105,8 @@ abstract class Controller
     protected function performPostRouting($mappings){
         if(is_array($mappings) && isset($mappings[$_POST[self::$postActionKey]])){
             self::$matchedPostAction = $_POST[self::$postActionKey];
+
+            Hook::executeHook(self::HOOK_BEFORE_POSTACTION_NAME, self::$matchedPostAction);
             $this->postReturned = call_user_func($mappings[$_POST[self::$postActionKey]]);
 
             return true;
