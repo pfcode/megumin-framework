@@ -13,6 +13,7 @@ class Dispatcher
     const RIGHT_VAR_CLOSURE = "}";
     const FRIENDLY_BLOCK_SEPARATOR = "/";
     const FRIENDLY_QUERY_SEPARATOR = "?";
+    const HOOK_BEFORE_CONTROLLER_NAME = "MEGUMIN_BEFORE_CONTROLLER";
 
     private static $baseURL = null;
     private static $urlPatterns = null;
@@ -150,6 +151,8 @@ class Dispatcher
         if(!class_exists($controller_class) || !is_subclass_of($controller_class, Controller::class)){
             return false;
         }
+        
+        Hook::executeHook(self::HOOK_BEFORE_CONTROLLER_NAME, $controller_class);
 
         self::$currentController = new $controller_class($args);
 
