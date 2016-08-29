@@ -9,8 +9,9 @@ namespace pfcode\MeguminFramework;
  */
 abstract class Controller
 {
+    private static $matchedPostAction;
+    
     protected static $postActionKey = "action";
-
     protected static $globalPostMappings = false;
 
     /**
@@ -101,6 +102,7 @@ abstract class Controller
      */
     protected function performPostRouting($mappings){
         if(is_array($mappings) && isset($mappings[$_POST[self::$postActionKey]])){
+            self::$matchedPostAction = $_POST[self::$matchedPostAction];
             $this->postReturned = call_user_func($mappings[$_POST[self::$postActionKey]]);
 
             return true;
@@ -115,6 +117,14 @@ abstract class Controller
      */
     public static function setGlobalPostMappings($mappings){
         self::$globalPostMappings = $mappings;
+    }
+
+    /**
+     * Get name of POST action dispatched
+     * @return mixed
+     */
+    public static function getMatchedPostAction(){
+        return self::$matchedPostAction;
     }
 
     /**
