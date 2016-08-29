@@ -32,9 +32,15 @@ abstract class View
      * @return string
      */
     protected function getPageTitle(){
-        return (strlen(self::$pageTitlePrefix) ? self::$pageTitlePrefix . self::$pageTitleSeparator : "")
+        $isPrefix = strlen(self::$pageTitlePrefix);
+        $isTitle = strlen($this->pageTitle);
+        $isSuffix = strlen(self::$pageTitleSuffix);
+
+        return self::$pageTitlePrefix
+            . (($isPrefix && $isTitle) || ($isPrefix && $isSuffix && !$isTitle) ? self::$pageTitleSeparator : "")
             . $this->pageTitle
-            . (strlen(self::$pageTitleSuffix) ? self::$pageTitleSeparator . self::$pageTitleSuffix : "");
+            . ($isTitle && $isSuffix ? self::$pageTitleSeparator : "")
+            . self::$pageTitleSuffix;
     }
 
     /**
