@@ -205,7 +205,7 @@ abstract class MySQLModelFactory extends ModelFactory
      * @return string
      */
     protected function escapeString($string){
-        return self::$database->escape_string($string);
+        return self::$database->escape_string((string) $string);
     }
 
     /**
