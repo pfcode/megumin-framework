@@ -11,6 +11,9 @@ namespace pfcode\MeguminFramework;
 
 final class Session
 {
+    /**
+     * @var Session
+     */
     private static $instance = false;
 
     /**
@@ -22,6 +25,7 @@ final class Session
         if (Session::$instance == false) {
             Session::$instance = new Session();
         }
+
         return Session::$instance;
     }
 
@@ -32,6 +36,19 @@ final class Session
     {
         if (session_status() == PHP_SESSION_NONE)
             session_start();
+    }
+
+    /**
+     * Try to override default PHP session timeout. Call this function
+     * BEFORE creating instance of this class / starting session manually elsewhere.
+     * @param $seconds
+     */
+    public static function setSessionTimeout($seconds){
+        // To be sure that maximum lifetime of PHP session will be set,
+        // you should change this value directly in php.ini file.
+        ini_set('session.gc_maxlifetime', $seconds);
+
+        session_set_cookie_params($seconds);
     }
 
     /**
