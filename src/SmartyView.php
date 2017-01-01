@@ -26,17 +26,26 @@ class SmartyView extends View
     }
 
     /**
+     * @return Smarty
+     */
+    public function createSmartyInstance(){
+        $smarty = new Smarty();
+
+        $smarty->force_compile = true;
+        $smarty->debugging = false;
+        $smarty->caching = true;
+        $smarty->cache_lifetime = 120;
+
+        return $smarty;
+    }
+
+    /**
      * @param bool $outputHTML
      * @return bool|string
      */
     public function display($outputHTML = false)
     {
-        $this->smarty = new Smarty();
-
-        $this->smarty->force_compile = true;
-        $this->smarty->debugging = false;
-        $this->smarty->caching = true;
-        $this->smarty->cache_lifetime = 120;
+        $this->smarty = $this->createSmartyInstance();
 
         $this->smarty->setTemplateDir(self::$templateDir);
 
