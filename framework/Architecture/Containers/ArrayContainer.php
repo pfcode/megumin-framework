@@ -16,7 +16,7 @@ class ArrayContainer implements ContainerInterface
      * @return mixed
      * @throws NotFoundException
      */
-    public function get($id): mixed
+    public function get($id)
     {
         if (!$this->has($id)) {
             throw new NotFoundException();

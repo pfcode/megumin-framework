@@ -38,7 +38,7 @@ class Cookies
      * @param null $default
      * @return mixed
      */
-    public static function get($key, $default = null): mixed
+    public static function get($key, $default = null)
     {
         if (self::exists($key)) {
             return $_COOKIE[$key];

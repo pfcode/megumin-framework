@@ -52,7 +52,7 @@ class Request
      * @param null $default
      * @return mixed
      */
-    public function get($key, $default = null): mixed
+    public function get($key, $default = null)
     {
         if ($this->type == self::METHOD_GET) {
             // When used method is GET then $_GET params have priority on $_POST content
@@ -94,7 +94,7 @@ class Request
      * @param null $default
      * @return mixed
      */
-    public function param($key, $default = null): mixed
+    public function param($key, $default = null)
     {
         return Arr::get($this->params, $key, $default);
     }
@@ -104,7 +104,8 @@ class Request
      * @param null $default
      * @return mixed
      */
-    public function cookie($key, $default = null) : mixed{
+    public function cookie($key, $default = null)
+    {
         return Cookies::get($key, $default);
     }
 }

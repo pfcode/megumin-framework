@@ -17,7 +17,7 @@ class Arr
      * @param null $default
      * @return mixed
      */
-    public static function get($array, $key, $default = null) : mixed{
+    public static function get($array, $key, $default = null){
         if(is_array($array) && isset($array[$key])){
             return $array[$key];
         }
