@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: pfcode
- * Date: 26.02.17
- * Time: 13:50
- */
 
 namespace pfcode\MeguminFramework;
 
@@ -76,7 +70,7 @@ class ArrayContainerTest extends \PHPUnit_Framework_TestCase
     /**
      * @return ArrayContainer
      */
-    private function createMockContainer()
+    private function createMockContainer(): ArrayContainer
     {
         $container = new ArrayContainer();
 
