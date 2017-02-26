@@ -70,4 +70,11 @@ class ArrayContainer implements ContainerInterface
 
         return false;
     }
+
+    /**
+     * @return int
+     */
+    public function count() : int{
+        return count($this->items);
+    }
 }

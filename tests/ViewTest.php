@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
  * User: pfcode
  * Date: 29.08.16
  * Time: 09:59
+ * @deprecated
  */
 class ViewTest extends TestCase
 {

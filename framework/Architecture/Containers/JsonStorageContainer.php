@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: pfcode
- * Date: 26.02.17
- * Time: 13:24
- */
 
 namespace pfcode\MeguminFramework\Architecture\Containers;
 
