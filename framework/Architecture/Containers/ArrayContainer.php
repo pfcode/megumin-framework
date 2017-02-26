@@ -2,9 +2,7 @@
 
 namespace pfcode\MeguminFramework\Architecture\Containers;
 
-use Psr\Container\ContainerInterface;
-
-class ArrayContainer implements ContainerInterface
+class ArrayContainer
 {
     /**
      * @var array
@@ -12,14 +10,15 @@ class ArrayContainer implements ContainerInterface
     protected $items = [];
 
     /**
-     * @param string $id
+     * @param $id
+     * @param null $default
      * @return mixed
      * @throws NotFoundException
      */
-    public function get($id)
+    public function get($id, $default = null)
     {
         if (!$this->has($id)) {
-            throw new NotFoundException();
+            return $default;
         }
 
         return $this->items[$id];

@@ -53,5 +53,7 @@ class JsonStorageContainer extends StorageContainer
         if($items === false){
             throw new ContainerException("Failed to JSON-decode file");
         }
+
+        $this->items = $items;
     }
 }

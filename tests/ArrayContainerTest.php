@@ -23,6 +23,7 @@ class ArrayContainerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($container->get("testKey") === "Hello, World!");
         $this->assertTrue($container->get("otherTestKey") === "Hello, ArrayContainer!");
+        $this->assertTrue($container->get("yetAnotherKey", null) === null);
     }
 
     public function testHasObject(): void
@@ -40,8 +41,7 @@ class ArrayContainerTest extends \PHPUnit_Framework_TestCase
         $container->remove("testKey");
         $container->remove("otherTestKey");
 
-        $this->expectException(NotFoundException::class);
-        $container->get("otherTestKey");
+        $this->assertTrue($container->get("testKey", null) === "null");
     }
 
     public function testCount(): void
@@ -49,14 +49,6 @@ class ArrayContainerTest extends \PHPUnit_Framework_TestCase
         $container = $this->createMockContainer();
 
         $this->assertTrue($container->count() === 2);
-    }
-
-    public function testNotExistingKeyExceptionOnGet(): void
-    {
-        $this->expectException(NotFoundException::class);
-
-        $container = new ArrayContainer();
-        $container->get("notExistingKey");
     }
 
     public function testNotExistingKeyExceptionOnRemove(): void
