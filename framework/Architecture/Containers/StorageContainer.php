@@ -2,16 +2,17 @@
 
 namespace pfcode\MeguminFramework\Architecture\Containers;
 
-abstract class StorageContainer extends ArrayContainer {
+abstract class StorageContainer extends ArrayContainer
+{
     /**
      * @throws ContainerException
-     * @return bool
+     * @return void
      */
-    abstract public function save() : bool;
+    abstract public function save();
 
     /**
      * @throws ContainerException
-     * @return bool
+     * @return void
      */
-    abstract public function load() : bool;
+    abstract public function load();
 }

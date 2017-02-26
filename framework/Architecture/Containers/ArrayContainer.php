@@ -9,7 +9,7 @@ class ArrayContainer implements ContainerInterface
     /**
      * @var array
      */
-    private $items = [];
+    protected $items = [];
 
     /**
      * @param string $id
