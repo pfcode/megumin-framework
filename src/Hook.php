@@ -38,7 +38,7 @@ class Hook
         if(isset(self::$hooks[$hookName])){
             foreach(self::$hooks[$hookName] as $funcCallback){
                 if(is_callable($funcCallback)){
-                    $ret = call_user_func($funcCallback, $params);
+                    $ret = call_user_func($funcCallback, ...$params);
 
                     if($ret === false){
                         break;

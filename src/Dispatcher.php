@@ -152,7 +152,7 @@ class Dispatcher
             return false;
         }
         
-        Hook::executeHook(self::HOOK_BEFORE_CONTROLLER_NAME, $controller_class);
+        Hook::executeHook(self::HOOK_BEFORE_CONTROLLER_NAME, [$controller_class, $args]);
 
         self::$currentController = new $controller_class($args);
 
